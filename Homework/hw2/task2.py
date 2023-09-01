@@ -1,3 +1,4 @@
+from fractions import Fraction
 """
 Функция gcd(a, b) вычисляет наибольший общий делитель (НОД) двух чисел a и b
 Пока b не равно нулю:
@@ -54,6 +55,8 @@ product_numerator, product_denominator = simplify_fraction(product_numerator, pr
 # Проверка нулевого знаменателя
 if sum_denominator == 0:
     print("Сумма дробей: Ошибка (деление на 0)")
+elif sum_denominator == 1:
+    print("Сумма дробей: ", sum_numerator)
 else:
     if sum_numerator == sum_denominator:
         print("Сумма дробей: 1")
@@ -62,8 +65,21 @@ else:
 
 if product_denominator == 0:
     print("Произведение дробей: Ошибка (деление на 0)")
+elif product_denominator == 1:
+    print("Произведение дробей: ", product_numerator)
 else:
     if product_numerator == product_denominator:
         print("Произведение дробей: 1")
     else:
         print("Произведение дробей:", f"{product_numerator}/{product_denominator}")
+
+print("Проверка с использованием модуля Fraction")
+# Вычисляем сумму дробей
+sum_fraction = Fraction(numerator1, denominator1) + Fraction(numerator2, denominator2)
+
+# Вычисляем произведение дробей
+product_fraction = Fraction(numerator1, denominator1) * Fraction(numerator2, denominator2)
+
+# Выводим результаты
+print("Сумма дробей:", sum_fraction)
+print("Произведение дробей:", product_fraction)
