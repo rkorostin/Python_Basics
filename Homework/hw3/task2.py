@@ -6,17 +6,17 @@ from bs4 import BeautifulSoup
 
 def count_words(text):
     """
-    Функция count_words принимает текст и выполняет следующие действия:
-   - Удаляет знаки препинания и приводит текст к нижнему регистру с помощью регулярных выражений.
-   - Разбивает текст на слова.
-   - Подсчитывает количество встречаемых слов с помощью Counter.
-   - Возвращает 10 самых частых слов в виде списка кортежей.
+    Функция count_words принимает текст и производит подсчет слов,
+    которые имеют более 3-х символов
     """
     # Удаляем знаки препинания и приводим текст к нижнему регистру
     text = re.sub(r'[^\w\s]', '', text.lower())
 
-    # Разбиваем текст на слова
-    words = text.split()
+    # Возвращаем список слов, удовлетворяющих регулярному выражению
+    words = re.findall(r'\b\w+\b', text)
+
+    #Подсчитываем количество слов, которые имеют длину больше 3-х символов.
+    words = [word for word in words if len(word) > 3]
 
     # Подсчитываем количество встречаемых слов
     word_counts = Counter(words)
@@ -26,11 +26,17 @@ def count_words(text):
 
 
 def get_text_from_url(url):
+    """
+    Функция get_text_from_url принимает URL-адрес и возвращает ответ в виде текста HTML.
+    """
     response = requests.get(url)
     return response.text
 
 
 def parse_text(html):
+    """
+    Функция parse_text принимает текст HTML, парсит его и возвращает текст
+    """
     soup = BeautifulSoup(html, 'html.parser')
     text = soup.get_text()
     return text
