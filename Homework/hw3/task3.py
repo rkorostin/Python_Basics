@@ -2,6 +2,9 @@
 dict_items = {
     'спальник': 3.7,
     'палатка': 4.2,
+    'топор': 2.2,
+    'нож': 1.3,
+    'посуда': 3.3,
     'еда': 2.5,
     'вода': 2.9,
     'карта': 0.2,
@@ -43,13 +46,16 @@ def fill_backpack_all(items, max_weight):
 
 max_weight = float(input("Введите максимальный вес рюкзака: "))
 
-# Возвращаем один вариант
 result = fill_backpack(dict_items, max_weight)
 print("Максимальная вместимость рюкзака: ", result)
 print()
 
-# Возвращаем все возможные варианты
-result_all = fill_backpack_all(dict_items, max_weight)
-print("Все варианты сборки рюкзака: ")
-for i, backpack in enumerate(result_all):
-    print(f"Вариант {i+1}: {backpack}")
+choice = input("Хотите вывести список всех возможных вариантов сборки рюкзака? y/n: ")
+while choice != 'y' and choice != 'n':
+    choice = input("Некорректный ввод. Введите y или n: ")
+
+if choice == 'y':
+    result_all = fill_backpack_all(dict_items, max_weight)
+    print("Все варианты сборки рюкзака: ")
+    for i, backpack in enumerate(result_all):
+        print(f"Вариант {i + 1}: {backpack}")
