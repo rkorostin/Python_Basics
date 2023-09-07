@@ -36,7 +36,7 @@ def count_words(text, max_word_length):
     """
     words = text.split()  # Разбиваем текст на слова
     filtered_words = [word for word in words if
-                      len(word) > max_word_length]  # Оставляем слова, длина которых больше заданного значения
+                      len(word) >= max_word_length]  # Оставляем слова, длина которых не меньше указанного значения
     word_counts = Counter(filtered_words)  # Подсчитываем количество каждого слова
     most_popular_words = word_counts.most_common(10)  # Получаем 10 наиболее часто встречающихся слов
     return most_popular_words
