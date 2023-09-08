@@ -30,15 +30,16 @@ def fill_backpack(items, max_weight):
 
 def fill_backpack_all(items, max_weight):
     """
-    Вместо того, чтобы добавлять предмет в рюкзак, можно вызвать функцию рекурсивно для оставшихся
-    предметов и ограничиться только предметами, которые весят меньше или равно оставшемуся весу.
+    Функция позволяет получить все возможные варианты сборки рюкзака из вещей items
+    с ограничением по весу max_weight
     """
     backpacks = [[]]  # список для хранения всех возможных вариантов комплектации рюкзака
-    for item, weight in items.items():
+    for item, weight in items.items():  # итерация по каждому предмету и его весу из списка items.items()
         if weight <= max_weight:
-            new_backpacks = []
-            for backpack in backpacks:
-                new_backpack = backpack + [item]
+            new_backpacks = []  # в новом списке будут храниться новые варианты сборки рюкзака
+            for backpack in backpacks:  # итерируемся по каждому рюкзаку в списке backpacks.
+                new_backpack = backpack + [item]  # создается новый рюкзак, который является
+                # копией текущего рюкзака backpack, но с добавлением текущего предмета item
                 new_backpacks.append(new_backpack)
             backpacks.extend(new_backpacks)
     return backpacks
