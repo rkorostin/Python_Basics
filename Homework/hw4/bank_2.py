@@ -7,7 +7,7 @@ def bankomat():
     Если операция снятия суммы не кратна 3, то взимается комиссия 1,5% от снимаемой суммы
     Каждая операция вносится в список, который в любой момент можно вывести в терминале
     """
-    balance = 0
+    balance = 10000
     count_add = 0
     count_withdraw = 0
     operations = []
@@ -96,11 +96,21 @@ def bankomat():
         action = input("Выберите действие (пополнить (1), снять (2), история операций(3), выйти (0)): ")
 
         if action == "1":
-            amount = int(input("Введите сумму пополнения: "))
+            while True:
+                try:
+                    amount = int(input("Введите сумму пополнения: "))
+                    break
+                except ValueError:
+                    print("Неверный формат суммы. Повторите ввод.")
             balance, count_add, operations = add_balance(balance, amount)
 
         elif action == "2":
-            amount = int(input("Введите сумму снятия: "))
+            while True:
+                try:
+                    amount = int(input("Введите сумму снятия: "))
+                    break
+                except ValueError:
+                    print("Неверный формат суммы. Повторите ввод.")
             balance, count_withdraw, operations = withdraw_balance(balance, amount)
 
         elif action == "3":
