@@ -54,7 +54,7 @@ def bankomat():
                     balance -= tax
                     print("Налог 10% на богатство: ", tax)
                     operations.append("Налог на богатство: " + str(tax))
-                elif count_withdraw % 3 == 0:
+                elif count_withdraw % 3 == 0 and count_withdraw != 0:
                     commission = min(0.03 * amount, 600)
                     if commission < 30:
                         commission = 30
