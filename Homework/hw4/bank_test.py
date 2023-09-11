@@ -51,7 +51,7 @@ def bankomat():
             if amount <= balance:  # сумма снятия должна быть не меньше баланса
                 balance -= amount
                 count_withdraw += 1
-                if balance > 5000000:
+                if balance > 5_000_000:
                     tax = 0.1 * amount
                     balance -= tax
                     print("Налог 10% на богатство: ", tax)
