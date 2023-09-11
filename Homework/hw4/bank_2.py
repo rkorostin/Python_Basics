@@ -48,9 +48,9 @@ def bankomat():
         """
         nonlocal count_withdraw
         if amount % 50 == 0:
-            balance -= amount
-            count_withdraw += 1
             if amount <= balance:  # сумма снятия должна быть не меньше баланса
+                balance -= amount
+                count_withdraw += 1
                 if balance > 5000000:
                     tax = 0.1 * amount
                     balance -= tax
