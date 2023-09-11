@@ -9,7 +9,7 @@ def bankomat():
     """
     balance = 10000
     count_add = 0
-    count_withdraw = 0
+    count_withdraw = 1
     operations = []
 
     def add_balance(balance, amount):
@@ -54,7 +54,7 @@ def bankomat():
                     balance -= tax
                     print("Налог 10% на богатство: ", tax)
                     operations.append("Налог на богатство: " + str(tax))
-                elif count_withdraw % 3 == 0 and count_withdraw != 0:
+                elif count_withdraw % 3 == 0:
                     commission = min(0.03 * amount, 600)
                     if commission < 30:
                         commission = 30
@@ -63,7 +63,7 @@ def bankomat():
                     balance -= (amount + commission)
                     count_withdraw += 1
                     print("Комиссия 3% за каждую третью операцию: ", commission)
-                    operations.append("Комиссия за каждую третью операцию снятия: " + str(commission))
+                    operations.append("Комиссия 3% за каждую третью операцию снятия: " + str(commission))
                 else:
                     commission = min(0.015 * amount, 600)  # комиссия за снятие 1,5%,
                     # но не менее 30 и не более 600
@@ -76,7 +76,7 @@ def bankomat():
                     print("Снято: ", amount)
                     print("Комиссия 1.5% за операцию: ", commission)
                     operations.append("Снято средств: " + str(amount))
-                    operations.append("Комиссия за операцию снятия: " + str(commission))
+                    operations.append("Комиссия 1.5% за операцию снятия: " + str(commission))
             else:
                 print("Недостаточно средств на счете")
         else:
