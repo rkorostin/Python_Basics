@@ -9,10 +9,10 @@ def create_reverse_dict(**kwargs):
     print("Исходные параметры:")
     for key, value in kwargs.items():  # итерируемся по всем элементам через items()
         print(f"{key}: {value}")
-        if isinstance(value, (list, dict, set)):  # проверка типа значения value на изменяемые объекты
+        if isinstance(value, (list, dict, set, bool)):  # проверка типа значения value на изменяемые объекты
             reverse_dict[str(value)] = key
         else:
-            reverse_dict[str(value)] = key
+            reverse_dict[value] = key  # поправка Кирилла
     return reverse_dict
 
 
