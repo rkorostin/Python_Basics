@@ -52,6 +52,7 @@ def bankomat():
                     elif commission > 600:
                         commission = 600
                     balance -= commission
+                    count += 1
                     print("Комиссия 3% за каждую третью операцию: ", commission)
                     operations.append("Комиссия за каждую третью операцию снятия: " + str(commission))
                 else:
