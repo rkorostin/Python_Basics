@@ -1,15 +1,17 @@
 def bankomat():
     """
-    Пополняет баланс. Каждая третья операция облагается комиссией 3% от вносимой суммы (не менее 30, но не более 600).
+    Пополняет баланс. Начальная сумма 0.
+    Каждая третья операция облагается комиссией 3% от вносимой суммы (не менее 30, но не более 600).
     Если баланс больше 5_000_000, то действует налог на богатство - 10% от вносимой или снимаемой суммы.
     При этом комиссия в 1,5% или 3% уже не действует.
     Уменьшает баланс. Каждая третья операция облагается комиссией 3% от снимаемой суммы (не менее 30, но не более 600).
     Если операция снятия суммы не кратна 3, то взимается комиссия 1,5% от снимаемой суммы
     Каждая операция вносится в список, который в любой момент можно вывести в терминале
     """
-    balance = 0
+    balance = 0  # Баланс
+    balance_inter = None  # Предварительный баланс без учета комиссии и налогов
     count_add = 0  # Счётчик для операций пополнения
-    count_withdraw = 0  # Счётчик для операций снятия
+    count_withdraw = 1  # Счётчик для операций снятия
     operations = []  # Список операций
 
     def add_balance(balance, amount):
@@ -27,6 +29,7 @@ def bankomat():
                 tax = 0.1 * amount
                 balance -= tax
                 print("Налог 10% на богатство: ", tax)
+                print("Пополнение: ", amount - tax)
                 operations.append("Налог на богатство: " + str(tax))
             if count_add % 3 == 0:  # Действие для каждой третьей операции
                 commission = min(0.03 * amount, 600)  # Комиссия за пополнение счёта 3%,
@@ -46,39 +49,61 @@ def bankomat():
         """
         Функция снятия со счёта. Принимает текущий баланс и сумму для снятия
         """
-        nonlocal count_withdraw
+        nonlocal count_withdraw, balance_inter
         if amount % 50 == 0:
             if amount <= balance:  # сумма снятия должна быть не меньше баланса
-                balance -= amount
-                count_withdraw += 1
-                if balance > 5_000_000:
-                    tax = 0.1 * amount
-                    balance -= tax
-                    print("Налог 10% на богатство: ", tax)
-                    operations.append("Налог на богатство: " + str(tax))
-                elif count_withdraw % 3 == 0:
-                    commission = min(0.03 * amount, 600)
-                    if commission < 30:
-                        commission = 30
-                    elif commission > 600:
-                        commission = 600
-                    balance -= commission
-                    print("Комиссия 3% за каждую третью операцию: ", commission)
-                    operations.append("Комиссия 3% за каждую третью операцию снятия: " + str(commission))
-                else:
-                    commission = min(0.015 * amount, 600)  # комиссия за снятие 1,5%,
+                if balance > 5_000_000:  # проверяем баланс на "налог на богатство"
+                    tax = 0.1 * amount  # рассчитываем налог
+                    balance_inter = balance
+                    balance_inter -= amount  # рассчитываем предварительный баланс после снятия введённой суммы
+                    if tax <= balance_inter:  # проверяем, что хватает средств для снятия налога
+                        balance -= amount + tax  # снимаем введённую сумму + налог
+                        print("Снято: ", amount)
+                        print("Налог на богатство (10% от снятой суммы): ", tax)
+                        operations.append("Налог на богатство: " + str(tax))
+                    else:
+                        print("Недостаточно средств на счете.")
+
+                elif count_withdraw % 3 == 0:  # Если это третья операция, то работает комиссия 3%
+                    commission = min(0.03 * amount, 600)  # Рассчитываем комиссию 3% от снимаемой суммы,
                     # но не менее 30 и не более 600
                     if commission < 30:
                         commission = 30
                     elif commission > 600:
                         commission = 600
-                    balance -= commission
-                    print("Снято: ", amount)
-                    print("Комиссия 1.5% за операцию: ", commission)
-                    operations.append("Снято средств: " + str(amount))
-                    operations.append("Комиссия 1.5% за операцию снятия: " + str(commission))
+
+                    balance_inter = balance
+                    balance_inter -= amount
+                    if commission <= balance_inter:
+                        balance -= commission + amount
+                        count_withdraw += 1
+                        print("Снято: ", amount)
+                        print("Комиссия 3% за каждую третью операцию снятия: ", commission)
+                        operations.append("Комиссия 3% за каждую третью операцию снятия: " + str(commission))
+                    else:
+                        print("Недостаточно средств на счете.")
+
+                else:  # Если это не третья операция, то работает комиссия 1.5% от снимаемой суммы
+                    commission = min(0.015 * amount, 600)
+                    if commission < 30:
+                        commission = 30
+                    elif commission > 600:
+                        commission = 600
+
+                    balance_inter = balance
+                    balance_inter -= amount
+                    if commission <= balance_inter:
+                        balance -= commission + amount
+                        count_withdraw += 1
+                        print("Снято: ", amount)
+                        print("Комиссия 1.5% за операцию: ", commission)
+                        operations.append("Комиссия 1.5% за операцию снятия: " + str(commission))
+                    else:
+                        print("Недостаточно средств на счете.")
+
             else:
                 print("Недостаточно средств на счете")
+
         else:
             print("Сумма снятия должна быть кратна 50")
         return balance, count_withdraw, operations
