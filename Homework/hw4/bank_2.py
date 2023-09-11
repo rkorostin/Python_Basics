@@ -7,10 +7,10 @@ def bankomat():
     Если операция снятия суммы не кратна 3, то взимается комиссия 1,5% от снимаемой суммы
     Каждая операция вносится в список, который в любой момент можно вывести в терминале
     """
-    balance = 10000
-    count_add = 0
-    count_withdraw = 1
-    operations = []
+    balance = 0
+    count_add = 0  # Счётчик для операций пополнения
+    count_withdraw = 0  # Счётчик для операций снятия
+    operations = []  # Список операций
 
     def add_balance(balance, amount):
         """
@@ -48,6 +48,8 @@ def bankomat():
         """
         nonlocal count_withdraw
         if amount % 50 == 0:
+            balance -= amount
+            count_withdraw += 1
             if amount <= balance:  # сумма снятия должна быть не меньше баланса
                 if balance > 5000000:
                     tax = 0.1 * amount
@@ -60,8 +62,7 @@ def bankomat():
                         commission = 30
                     elif commission > 600:
                         commission = 600
-                    balance -= (amount + commission)
-                    count_withdraw += 1
+                    balance -= commission
                     print("Комиссия 3% за каждую третью операцию: ", commission)
                     operations.append("Комиссия 3% за каждую третью операцию снятия: " + str(commission))
                 else:
@@ -71,8 +72,7 @@ def bankomat():
                         commission = 30
                     elif commission > 600:
                         commission = 600
-                    balance -= (amount + commission)
-                    count_withdraw += 1
+                    balance -= commission
                     print("Снято: ", amount)
                     print("Комиссия 1.5% за операцию: ", commission)
                     operations.append("Снято средств: " + str(amount))
