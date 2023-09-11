@@ -13,7 +13,7 @@ def bankomat():
                 balance += amount
                 count += 1
                 if count % 3 == 0:  # Действие для каждой третьей операции
-                    commission = min(0.03 * balance, 600)  # Комиссия за пополнение счёта 3%,
+                    commission = min(0.03 * amount, 600)  # Комиссия за пополнение счёта 3%,
                     # но не менее 30 и не более 600
                     if commission < 30:
                         commission = 30
@@ -39,7 +39,7 @@ def bankomat():
                     print("Снято: ", amount)
                     print("Комиссия за операцию: ", commission)
                     if count % 3 == 0:
-                        commission = min(0.03 * balance, 600)
+                        commission = min(0.03 * amount, 600)
                         if commission < 30:
                             commission = 30
                         elif commission > 600:
