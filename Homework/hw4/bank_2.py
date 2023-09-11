@@ -67,15 +67,6 @@ def bankomat():
                     print("Комиссия 1.5% за операцию: ", commission)
                     operations.append("Снято средств: " + str(amount))
                     operations.append("Комиссия за операцию снятия: " + str(commission))
-                # if count % 3 == 0:
-                #     commission = min(0.03 * amount, 600)
-                #     if commission < 30:
-                #         commission = 30
-                #     elif commission > 600:
-                #         commission = 600
-                #     balance -= commission
-                #     print("Комиссия 3% за каждую третью операцию: ", commission)
-                #     operations.append("Комиссия за каждую третью операцию снятия: " + str(commission))
             else:
                 print("Недостаточно средств на счете")
         else:
