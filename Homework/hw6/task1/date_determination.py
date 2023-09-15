@@ -1,3 +1,6 @@
+import sys
+
+
 def is_leap_year(year):
     """
     Функция для проверки, является ли год високосным.
@@ -43,3 +46,11 @@ def is_valid_date(date):
                 return False
 
     return True
+
+
+if __name__ == "__main__":
+    date = sys.argv[1]  # Получаем дату из аргументов командной строки
+    if is_valid_date(date):
+        print("Дата существует")
+    else:
+        print("Дата не существует")
