@@ -1,4 +1,4 @@
-from chess_package.queens import check_queens
+from chess_package.check_queens import check_queens
 
 # queens = [(1, 1), (2, 7), (3, 5), (4, 8), (5, 2), (6, 4), (7, 6), (8, 3)]  # True
 queens = [(1, 1), (2, 7), (3, 5), (4, 8), (5, 2), (6, 4), (7, 6), (8, 1)]  # False
