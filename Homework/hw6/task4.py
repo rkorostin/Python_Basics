@@ -1,5 +1,5 @@
-from chess_package.random_queens import random_queens
-from chess_package.check_queens import check_queens
+from chess_package import random_queens
+from chess_package import check_queens
 
 # Создаем пустой список, в который будут добавляться корректные комбинации ферзей
 queens_list_valid = []
