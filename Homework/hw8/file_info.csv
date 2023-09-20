@@ -1,0 +1,6 @@
+path,type,size,parent_directory
+demo_folder\text.txt,file,16,demo_folder
+demo_folder\folder1\pdf.pdf,file,5,demo_folder\folder1
+demo_folder\folder2\film.mp4,file,105,demo_folder\folder2
+demo_folder\folder2\Семинар 8. Погружение в Python. Сериализация.pdf,file,2633890,demo_folder\folder2
+demo_folder\folder2\folder3\test666.txt,file,37,demo_folder\folder2\folder3

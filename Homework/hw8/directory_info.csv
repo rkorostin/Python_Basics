@@ -1,0 +1,4 @@
+path,type,size,parent_directory
+demo_folder\folder1,directory,5,demo_folder
+demo_folder\folder2,directory,2634032,demo_folder
+demo_folder\folder2\folder3,directory,37,demo_folder\folder2

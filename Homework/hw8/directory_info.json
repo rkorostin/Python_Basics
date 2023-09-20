@@ -1,0 +1,1 @@
+[{"path": "demo_folder\\folder1", "type": "directory", "size": 5, "parent_directory": "demo_folder"}, {"path": "demo_folder\\folder2", "type": "directory", "size": 2634032, "parent_directory": "demo_folder"}, {"path": "demo_folder\\folder2\\folder3", "type": "directory", "size": 37, "parent_directory": "demo_folder\\folder2"}]
