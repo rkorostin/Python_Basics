@@ -3,6 +3,7 @@
 # Создаём класс Bankomat с конструктором, который инициализирует свойства balance и operations.
 # Затем мы определяем методы add_balance, withdraw_balance и show_operations, которые соответствуют
 # функциям add_balance, withdraw_balance и show_operations из исходного кода.
+# https://github.com/rkorostin/Python_Basics/blob/main/Homework/hw4/bank_test.py
 # В методах мы обращаемся к свойствам balance и operations, чтобы получить доступ к текущему балансу и истории операций.
 class Bankomat:
     def __init__(self):
